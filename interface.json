@@ -1,0 +1,162 @@
+{
+	"includeMinimize": true,
+	"infoGraphic": {
+		"show": true,
+		"popup": false,
+		"width":600,
+		"height":400, 
+		"url":"https://coastalresilience.org/project/southwest-washington/"
+	},
+	"tooltips": {
+		"simulation": {
+			"popup":true,
+			"html": "<div class='estuary-restoration-tooltip-popup'><span class='estuary-restoration-tooltip-popup-header'>Simulations</span><br>Eleven simulations and a baseline were run to model hydraulic impacts of implementing particular projects and project combinations.<br><br><ul><li>The baseline represents existing conditions without new project implementation around 2015.</li><li>Simulation 1: Small Projects, which included these projects: SF Levee Setbacks 2, 3, 4 (dike setback; 55 acres), McGlinn Causeway (hydraulic; 5.8 acres), TNC South Fork (backwater channel; 1.2 acres), Cottonwood Island (hydraulic; 14 acres), East Cottonwood (backwater channel; 3 acres), Pleasant Ridge South (dike setback; 28 acres), Hall Slough (dike setback; 135 acres), Fir Island Farm (dike setback; 138 acres), Telegraph Slough Full (dike setback/hydraulic; 538 acres), Sullivan Hacienda (dike setback; 207 acres), and Rawlins Road Distributary Channel (hydraulic; 5 acres).</li><li>Simulation 2: Fir Island Cross Island Connector, a major hydraulic project covering 151 acres.</li> <li>Simulation 3: Avon-Swinomish Bypass, a major hydraulic project covering 1297 acres.</li><li>Simulation 4: NF Left Bank Levee Setback C, a major dike setback project covering 279 acres.</li> <li>Simulation 5: NF Left Bank Levee Setback A, a major dike setback project covering 284 acres.</li> <li>Simulation 6: Moderate Influence Projects-Group 1, which included these projects: NF Right Bank Levee Setback (dike setback; 86 acres), Milltown Island (dike breach; 212 acres), Telegraph Slough 1 (dike setback; 188), and Thein Farm (levee setback; 75 acres).</li> <li>Simulation 7: Moderate Influence Projects-Group 2, including these projects: Deepwater Slough Phase 2 (dike removal; 265 acres), Rawlins Road (dike setback; 192 acres), and Telegraph Slough 1&2 (dike setback; 305 acres).</li><li>Simulation 8: Selected Projects, selecting all projects except Avon-Swin Bypass and NF Left Bank Levee Setback A.</li><li>Simulation 9: Climate Change without projects, representing a climate change scenario with no new project implementation.</li><li>Simulation 10: Climate Change with selected projects, representing a climate change scenario selecting all projects except Avon-Swin Bypass and NF Left Bank Levee Setback A.</li></ul></div>",
+			"width":600,
+			"height":500
+		},
+		"flowTide": {
+			"popup":true,
+			"html": "<div class='estuary-restoration-tooltip-popup'><span class='estuary-restoration-tooltip-popup-header'>Flow (cfs) & Tide (ft)</span><br>Information about flows and tides can allow a hydraulic model to estimate water volumes, elevations, and dynamics.<br><br>Flow refers to the mean volume of water moving through the Skagit River Delta during a specified time of the year or during flood stage. Four flow scenarios were assessed here with volume provided in cubic feet per second (cfs): Low flow (12,000 cfs for both current and future/climate change low flow simulations); Second quarter (62,000 cfs average over April, May, & June without climate change or 103,237 cfs with climate change); May mean river discharge (20,400 cfs); and Flood stage (93,200 cfs).<br><br>Tidal fluctations change water surface elevation (WSE) over the course of a day, and sea level rise is changing and projected to further change tidal WSE this century. Tidal water surface elevations relative to NADV88 vertical datum was assessed for five scenarios: High tide (10.8 ft); High tide with flood scenario only (10.4 ft); High tide with climate change (12.67 ft); Low tide (-3.3 ft); and Low tide with climate change (1.43 ft).</div>",
+			"width":600,
+			"height":300
+		},
+		"modelOutput": {
+			"popup":true,
+			"html": "<div class='estuary-restoration-tooltip-popup'><span class='estuary-restoration-tooltip-popup-header'>Model Outputs</span><br>Three types of model outputs are available here: water surface elevation (WSE), change in WSE, and depth. All are in units of vertical feet. Here, water surface elevation is the elevation of the water surface relative to the NADV88 vertical datum (as opposed to other datums like Mean High High Water or  Mean Sea Level). Change in WSE is calculated as the difference in WSE from baseline to post-project implementation. Depth is the vertical distance from the water surface to the river floor or sea floor.</div>",
+			"width":600,
+			"height":200
+		}
+	},
+	"serviceUrl": "https://dev-services.coastalresilience.org/arcgis/rest/services/Washington/Flood_SLR/MapServer",
+	"extent": {
+		"xmin":-13650143,
+		"ymin":6153464,
+		"xmax":-13610854,
+		"ymax":6186370,
+		"spatialReference":{
+			"wkid":102100,
+			"latestWkid":3857
+		}
+	},
+	"simulation": {
+		"name":"simulation",
+		"options":[
+			{
+				"label": "Baseline",
+				"value": "r0"
+			},
+			{
+				"label": "Small Projects",
+				"value": "r1"
+			},
+			{
+				"label": "Fir Island Cross Island Connector",
+				"value": "r2"
+			},
+			{
+				"label": "Avon Swinomish Bypass",
+				"value": "r3"
+			},
+			{
+				"label": "N Fork Left Bank Levee Setback C",
+				"value": "r4"
+			},
+			{
+				"label": "N Fork Left Bank Levee Setback A",
+				"value": "r5"
+			},
+			{
+				"label": "Moderate Influence Projects - Group 1",
+				"value": "r6"
+			},
+			{
+				"label": "Moderate Influence Projects - Group 2",
+				"value": "r7"
+			},
+			{
+				"label": "Selected Projects",
+				"value": "r8"
+			},
+			{
+				"label": "Climate change without projects",
+				"value": "r9"
+			},
+			{
+				"label": "Climate change with selected projects",
+				"value": "r10"
+			}
+		]
+	},
+	"flowTide": {
+		"name":"flowTide",
+		"options":[
+			{
+				"label": "Low flow at High Tide",
+				"value": "f0"
+			},
+			{
+				"label": "Q1 at High Tide",
+				"value": "f1"
+			},
+			{
+				"label": "May mean river discharge at High Tide",
+				"value": "f2"
+			},
+			{
+				"label": "Flood at High Tide",
+				"value": "f3"
+			},
+			{
+				"label": "Low flow at Low Tide",
+				"value": "f4"
+			},
+			{
+				"label": "Q1 at Low Tide",
+				"value": "f5"
+			},
+			{
+				"label": "May mean river discharge at Low Tide",
+				"value": "f6"
+			},
+			{
+				"label": "Flood at Low Tide",
+				"value": "f7"
+			}
+		]
+	},
+	"modelOutput": {
+		"name":"modelOutput",
+		"options":[
+			{
+				"label": "Water surface elevation (WSE)",
+				"value": "m0"
+			},
+			{
+				"label": "Change in water surface elevation (Delta WSE)",
+				"value": "m1"
+			},
+			{
+				"label": "Depth",
+				"value": "m2"
+			}
+		]
+	},
+	"additionalLayers": {
+		"concept_area": {
+			"name":"concept_area",
+			"label":"Project Concept Areas",
+			"value":"concept_area"
+		},
+		"farm": {
+			"name":"farm",
+			"label":"Relevant Farm Analysis",
+			"value":"farm"
+		},
+		"elevation": {
+			"name":"elevation",
+			"label":"Elevation: Inform Fish Objv. 2 and 6",
+			"value":"elevation"
+		}
+	
+	}
+}
