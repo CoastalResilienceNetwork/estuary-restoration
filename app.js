@@ -227,6 +227,7 @@ define([
 				
 				if (this._firstLoad) {
 					this._map.setExtent(new Extent(this._extent));
+					this.updateOptions();
 					this.updateMapLayers();
 					this._firstLoad = false;
 				}
@@ -371,6 +372,7 @@ define([
 					domConstruct.create("option", { innerHTML: opt.label, value: opt.value }, self.simulationSelect);
 				});
 				on(this.simulationSelect, "change", function() {
+					self.updateOptions();
 					self.updateMapLayers();
 				});
 				this.simulationSelect.value = _.first(this.simulationSelect.options).value;			
@@ -477,7 +479,38 @@ define([
 			    });
 				this.opacityContainer.appendChild(this.opacitySlider.domNode);
 			}
+			
+			this.updateOptions = function() {
+				var simulationOption = this.simulationSelect.value.toLowerCase();
+				var flowTideOptions = [];
+				var modelOutputOptions = [];
+				array.forEach(this._interface.flowTide.options, function(flowTideOption) { 
+					array.forEach(self._interface.modelOutput.options, function(modelOutputOption) {
+						var layerKey = simulationOption + "|" + flowTideOption.value + "|" + modelOutputOption.value;
+						if (_.has(self._data, layerKey)) {
+							flowTideOptions = _.union(flowTideOptions, [flowTideOption]);
+							modelOutputOptions = _.union(modelOutputOptions, [modelOutputOption]);
+						}
+					});
+				}); 
 
+				/* console.log(flowTideOptions);
+				console.log(modelOutputOptions); */
+				
+				domConstruct.empty(this.flowTideSelect);
+				array.forEach(flowTideOptions, function(opt) {
+					domConstruct.create("option", { innerHTML: opt.label, value: opt.value }, self.flowTideSelect);
+				});
+				this.flowTideSelect.value = _.first(this.flowTideSelect.options).value;	
+				
+				domConstruct.empty(this.modelOutputSelect);
+				array.forEach(modelOutputOptions, function(opt) {
+					domConstruct.create("option", { innerHTML: opt.label, value: opt.value }, self.modelOutputSelect);
+				});
+				this.modelOutputSelect.value = _.first(this.modelOutputSelect.options).value;	
+				
+			}
+			
 			this.createTooltips = function() {
 				on(query('*.fa[class*="slr-' + this._map.id + '"]'), "click", function(evt) {
 					var cssClass = _.last(domAttr.get(this, "class").split(" "));
