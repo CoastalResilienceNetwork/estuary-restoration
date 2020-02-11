@@ -275,14 +275,17 @@ define([
 				this._mapLayer.hide();
 				
 				var layerKey = _.values(parameters).join("|");
-				console.log(layerKey);
+				//console.log(layerKey);
 				var visibleIds = (_.has(this._data, layerKey)) ? this._data[layerKey] : [];
 				
-				array.forEach(_.keys(this._interface.additionalLayers), function(cb) {
-					if (self[cb + "CheckBox"].checked) {
-						visibleIds = _.union(visibleIds, self._data[cb]);
-					}
+				array.forEach(_.keys(this._interface.additionalLayers), function(key) {
+					array.forEach(self._interface.additionalLayers[key].layers, function(cb) {
+						if (self[cb.name + "CheckBox"].checked) {
+							visibleIds = _.union(visibleIds, self._data[cb.value]);
+						}
+					});
 				});
+						
 				this._mapLayer.setVisibleLayers(visibleIds);
 				this._mapLayer.show();
 				
@@ -360,7 +363,7 @@ define([
 				// simulation control
 				var simulationText = domConstruct.create("div", {
 					style:"position:relative;margin-bottom:5px;",
-					innerHTML: '<span class="info-circle fa-stack fa slr-' + this._map.id + '-simulation"><i class="fa fa-circle fa-stack-1x"></i><span class="fa-stack-1x info-circle-text">1</span></span><b> Select a Simulation:</b>'
+					innerHTML: '<span class="info-circle fa-stack fa slr-' + this._map.id + '-simulation"><i class="fa fa-circle fa-stack-1x"></i><span class="fa-stack-1x info-circle-text">i</span></span><b> Select a Simulation:</b>'
 				}, simulationTd);
 				
 				var simulationSelectDiv = domConstruct.create("div", { 
@@ -381,7 +384,7 @@ define([
 				// flowTide controls
 				var flowTideText = domConstruct.create("div", {
 					style: "position:relative;margin-bottom:5px;",
-					innerHTML: '<span class="info-circle fa-stack fa slr-' + this._map.id + '-flowTide"><i class="fa fa-circle fa-stack-1x"></i><span class="fa-stack-1x info-circle-text">2</span></span><b> Select Flow (cfs) & Tide (ft):</b>'
+					innerHTML: '<span class="info-circle fa-stack fa slr-' + this._map.id + '-flowTide"><i class="fa fa-circle fa-stack-1x"></i><span class="fa-stack-1x info-circle-text">i</span></span><b> Select Flow (cfs) & Tide (ft):</b>'
 				}, flowTideTd);
 				
 				var flowTideSelectDiv = domConstruct.create("div", {
@@ -400,7 +403,7 @@ define([
 				// modelOutput controls
 				var modelOutputText = domConstruct.create("div", {
 					style: "position:relative;margin-bottom:5px;",
-					innerHTML: '<span class="info-circle fa-stack fa slr-' + this._map.id + '-modelOutput"><i class="fa fa-circle fa-stack-1x"></i><span class="fa-stack-1x info-circle-text">3</span></span><b> Select a Model Output:</b>'
+					innerHTML: '<span class="info-circle fa-stack fa slr-' + this._map.id + '-modelOutput"><i class="fa fa-circle fa-stack-1x"></i><span class="fa-stack-1x info-circle-text">i</span></span><b> Select a Model Output:</b>'
 				}, modelOutputTd);
 				
 				var modelOutputSelectDiv = domConstruct.create("div", {
@@ -422,30 +425,34 @@ define([
 				domConstruct.create("div", { class:"add-layers-header", innerHTML: "View Supporting Data" }, additionalLayersNode);
 				//domConstruct.create("div", { class:"add-layers-instructions", innerHTML: "Learn more about data used as part of these analyses by selecting from the layers below:" }, additionalLayersNode);
 				
-				var checkBoxDiv = domConstruct.create("div", {}, additionalLayersNode);
-				array.forEach(_.keys(this._interface.additionalLayers), function(cb) {
-					var cb = self._interface.additionalLayers[cb];
-					var checkBoxLabel = domConstruct.create("label", { 
-						for: "plugin-estuary-restoration-" + cb.name + "-" + self._map.id,
-						className:"styled-checkbox",
-						style:"display:block;margin-left:0px;"
-					}, checkBoxDiv);
+				var checkBoxDiv = domConstruct.create("div", { style:"padding:0px 10px;"}, additionalLayersNode);
+				array.forEach(_.keys(this._interface.additionalLayers), function(key) {
 					
-					self[cb.name + "CheckBox"] = domConstruct.create("input", {
-						type:"checkbox",
-						value:cb.value,
-						name:cb.name,
-						id:"plugin-estuary-restoration-" + cb.name + "-" + self._map.id,
-						disabled:false,
-						checked:false
-					}, checkBoxLabel);
+					domConstruct.create("div", { class:"add-layers-subheader", innerHTML: self._interface.additionalLayers[key].header }, checkBoxDiv);
+					array.forEach(self._interface.additionalLayers[key].layers, function(cb) {
+						var checkBoxLabel = domConstruct.create("label", { 
+							for: "plugin-estuary-restoration-" + cb.name + "-" + self._map.id,
+							className:"styled-checkbox",
+							style:"display:block;margin-left:0px;"
+						}, checkBoxDiv);
+						
+						self[cb.name + "CheckBox"] = domConstruct.create("input", {
+							type:"checkbox",
+							value:cb.value,
+							name:cb.name,
+							id:"plugin-estuary-restoration-" + cb.name + "-" + self._map.id,
+							disabled:false,
+							checked:false
+						}, checkBoxLabel);
+						
+						domConstruct.create("div", {
+							innerHTML: '<span>' + cb.label +'</span>'
+						}, checkBoxLabel);
+						
+						on(self[cb.name + "CheckBox"], "change", function(){
+							self.updateMapLayers();
+						});
 					
-					domConstruct.create("div", {
-						innerHTML: '<span>' + cb.label +'</span>'
-					}, checkBoxLabel);
-					
-					on(self[cb.name + "CheckBox"], "change", function(){
-						self.updateMapLayers();
 					});
 				});
 				

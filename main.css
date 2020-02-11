@@ -583,6 +583,11 @@ padding:0px;
 margin-bottom: 5px;
 }
 
+.plugin-estuary-restoration .add-layers-subheader {
+margin-top: 10px;
+font-weight: bold;
+}
+
 .plugin-estuary-restoration .add-layers-instructions {
 font-size: 12px;
 line-height: 14px;

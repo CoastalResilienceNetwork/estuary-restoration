@@ -143,20 +143,27 @@
 	},
 	"additionalLayers": {
 		"concept_area": {
-			"name":"concept_area",
-			"label":"Project Concept Areas",
-			"value":"concept_area"
+			"header": "Project Concept Areas",
+			"layers": [
+				{"name":"concept_area", "label":"Concept Area Outline", "value":"concept_area"}
+			]
 		},
 		"farm": {
-			"name":"farm",
-			"label":"Relevant Farm Analysis",
-			"value":"farm"
+			"header":"Relevant Farm Analysis",
+			"layers": [
+				{"name":"easements", "label":"Agriculture Easements", "value":"easements"},
+				{"name":"parcels", "label":"Parcels by Owner Type", "value":"parcels"},
+				{"name":"zoning", "label":"Land Use (Zoning)", "value":"zoning"}
+			]
 		},
 		"elevation": {
-			"name":"elevation",
-			"label":"Elevation: Inform Fish Objv. 2 and 6",
-			"value":"elevation"
+			"header":"Elevation: Inform Fish Objv. 2 and 6",
+			"layers": [
+				{"name":"contour", "label":"Post-removal Elevation Contours", "value":"contour"},
+				{"name":"elev5ft", "label":"Post-removal Elevation by 5-ft bin", "value":"elev5ft"},
+				{"name":"elev1ft", "label":"Post-removal Elevation by 1-ft bin", "value":"elev1ft"},
+				{"name":"elev", "label":"Post-removal Elevation in Feet", "value":"elev"}
+			]
 		}
-	
 	}
 }

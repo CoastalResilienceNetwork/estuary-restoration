@@ -135,10 +135,11 @@ define([
 						"value": plugin.modelOutputSelect.value
 				   }
 				   
-				   array.forEach(_.keys(plugin._interface.additionalLayers), function(layer) {
-					   var cb = plugin._interface.additionalLayers[layer];
-					   state.checkbox[cb.name + "CheckBox"] = plugin[cb.name + "CheckBox"].checked;
-				   })
+				   array.forEach(_.keys(plugin._interface.additionalLayers), function(key) {
+						array.forEach(plugin._interface.additionalLayers[key].layers, function(cb) {
+							state.checkbox[cb.name + "CheckBox"] = plugin[cb.name + "CheckBox"].checked
+						});
+					});
 				   
                    return state;
                 },
