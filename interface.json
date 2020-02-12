@@ -145,7 +145,7 @@
 		"concept_area": {
 			"header": "Project Concept Areas",
 			"layers": [
-				{"name":"concept_area", "label":"Concept Area Outline", "value":"concept_area"}
+				{"name":"concept_area", "label":"Concept Areas", "value":"concept_area"}
 			]
 		},
 		"farm": {
@@ -157,7 +157,7 @@
 			]
 		},
 		"elevation": {
-			"header":"Elevation: Inform Fish Objv. 2 and 6",
+			"header":"Elevation: Inform Fish Objectives 2 and 6",
 			"layers": [
 				{"name":"contour", "label":"Post-removal Elevation Contours", "value":"contour"},
 				{"name":"elev5ft", "label":"Post-removal Elevation by 5-ft bin", "value":"elev5ft"},
